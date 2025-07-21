@@ -5,13 +5,22 @@ run()
 
 function run() {
 
-	const buttons = document.querySelectorAll( "#game-matrix button" )
-
 	let symbol = "0"
+
+	const buttons = document.querySelectorAll( "#game-matrix button" )
+	const select = document.querySelector( "select" )
+
+	select.onchange = () => symbol = select.value
 
 	buttons.forEach( ( button, index ) => {
 
-		button.onclick = e => button.textContent = index
+		button.onclick = e => {
+
+			if ( symbol === "x" || symbol === "y" ) {
+
+				button.textContent = symbol
+			}
+		}
 	} )
 }
 
