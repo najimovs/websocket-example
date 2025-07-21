@@ -1,0 +1,31 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#app {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+#game-matrix {
+	border: 1pt solid black;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+}
+
+#game-matrix button {
+	background: transparent;
+	border: 1pt solid black;
+	display: flex;
+	padding: 2rem;
+	cursor: pointer;
+}
+
+#game-matrix button:hover {
+	background-color: #e0e0e0;
+}

@@ -1,21 +1,34 @@
+import "./main.css"
 import { io } from "socket.io-client"
 
-const socket = io( "http://localhost:3000" )
+run()
 
-const input = document.querySelector( "input" )
-const ul = document.querySelector( "ul" )
+function run() {
 
-socket.on( "receive_message", message => {
+	const buttons = document.querySelectorAll( "#game-matrix button" )
 
-	const li = document.createElement( "li" )
-	li.textContent = message
-	ul.appendChild( li )
-} )
+	let symbol = "0"
 
-input.onkeyup = e => {
+	buttons.forEach( ( button, index ) => {
 
-	if ( e.keyCode === 13 ) {
-
-		socket.emit( "send_message", input.value )
-	}
+		button.onclick = e => button.textContent = index
+	} )
 }
+
+// const socket = io( "http://localhost:3000" )
+// socket.emit( "new ")
+
+// socket.on( "receive_message", message => {
+
+// 	const li = document.createElement( "li" )
+// 	li.textContent = message
+// 	ul.appendChild( li )
+// } )
+
+// input.onkeyup = e => {
+
+// 	if ( e.keyCode === 13 ) {
+
+// 		socket.emit( "send_message", input.value )
+// 	}
+// }
