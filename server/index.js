@@ -16,4 +16,6 @@ httpServer.listen( 3_000, () => {
 io.on( "connection", socket => {
 
 	console.log( "New connection" )
+
+	socket.on( "event_a", () => socket.emit( "event_b" ) )
 } )
