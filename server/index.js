@@ -3,6 +3,7 @@ import { createServer } from "http"
 
 const clients = []
 const state = new Map()
+let lastSymbol = null
 
 const httpServer = createServer()
 const io = new Server( httpServer, {
@@ -23,11 +24,15 @@ io.on( "connection", client => {
 
 	client.on( "action", ( { index, symbol } ) => {
 
-		state.set( index, symbol )
+		if ( symbol !== lastSymbol ) {
 
-		for ( const client of clients ) {
+			lastSymbol = symbol
+			state.set( index, symbol )
 
-			client.emit( "update", { index, symbol } )
+			for ( const client of clients ) {
+
+				client.emit( "update", { index, symbol } )
+			}
 		}
 	} )
 } )
