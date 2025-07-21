@@ -21,6 +21,7 @@ function run() {
 	socket.on( "update", ( { index, symbol } ) => {
 
 		buttons[ index ].textContent = symbol
+		buttons[ index ].setAttribute( "disabled", "true" )
 	} )
 
 	buttons.forEach( ( button, index ) => {

@@ -24,9 +24,15 @@ io.on( "connection", client => {
 
 	client.on( "action", ( { index, symbol } ) => {
 
+		if ( state.has( index ) ) {
+
+			return
+		}
+
 		if ( symbol !== lastSymbol ) {
 
 			lastSymbol = symbol
+
 			state.set( index, symbol )
 
 			for ( const client of clients ) {
