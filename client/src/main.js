@@ -24,12 +24,25 @@ function run() {
 		buttons.forEach( button => button.removeAttribute( "disabled" ) )
 
 		select.setAttribute( "disabled", "true" )
+
+		socket.emit( "set_symbol", symbol )
 	}
 
 	socket.on( "update", ( { index, symbol } ) => {
 
 		buttons[ index ].textContent = symbol
 		buttons[ index ].setAttribute( "disabled", "true" )
+	} )
+
+	socket.on( "busy_symbol", symbol => {
+
+		[ ...select.children ].forEach( option => {
+
+			if ( option.value === symbol ) {
+
+				option.setAttribute( "disabled", "true" )
+			}
+		} )
 	} )
 
 	socket.on( "reset", () => {

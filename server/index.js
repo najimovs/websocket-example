@@ -22,6 +22,14 @@ io.on( "connection", client => {
 
 	clients.push( client )
 
+	client.on( "set_symbol", symbol => {
+
+		for ( const client of clients ) {
+
+			client.emit( "busy_symbol", symbol )
+		}
+	} )
+
 	client.on( "reset", () => {
 
 		lastSymbol = null
