@@ -24,9 +24,9 @@
 	border: 1pt solid black;
 	display: flex;
 	padding: 2rem;
-	cursor: pointer;
 }
 
-#game-matrix button:hover {
+#game-matrix button:not(:disabled):hover {
 	background-color: #e0e0e0;
+	cursor: pointer;
 }

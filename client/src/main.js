@@ -14,6 +14,8 @@ function run() {
 	select.onchange = () => {
 
 		symbol = select.value
+
+		buttons.forEach( button => button.removeAttribute( "disabled" ) )
 	}
 
 	socket.on( "update", ( { index, symbol } ) => {
