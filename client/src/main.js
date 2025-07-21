@@ -6,11 +6,20 @@ run()
 function run() {
 
 	let symbol = "0"
+	const socket = io( "http://localhost:3000" )
 
 	const buttons = document.querySelectorAll( "#game-matrix button" )
 	const select = document.querySelector( "select" )
 
-	select.onchange = () => symbol = select.value
+	select.onchange = () => {
+
+		symbol = select.value
+	}
+
+	socket.on( "update", ( { index, symbol } ) => {
+
+		buttons[ index ].textContent = symbol
+	} )
 
 	buttons.forEach( ( button, index ) => {
 
@@ -18,26 +27,8 @@ function run() {
 
 			if ( symbol === "x" || symbol === "y" ) {
 
-				button.textContent = symbol
+				socket.emit( "action", { index, symbol } )
 			}
 		}
 	} )
 }
-
-// const socket = io( "http://localhost:3000" )
-// socket.emit( "new ")
-
-// socket.on( "receive_message", message => {
-
-// 	const li = document.createElement( "li" )
-// 	li.textContent = message
-// 	ul.appendChild( li )
-// } )
-
-// input.onkeyup = e => {
-
-// 	if ( e.keyCode === 13 ) {
-
-// 		socket.emit( "send_message", input.value )
-// 	}
-// }
