@@ -22,6 +22,8 @@ function run() {
 		symbol = select.value
 
 		buttons.forEach( button => button.removeAttribute( "disabled" ) )
+
+		select.setAttribute( "disabled", "true" )
 	}
 
 	socket.on( "update", ( { index, symbol } ) => {
@@ -31,6 +33,8 @@ function run() {
 	} )
 
 	socket.on( "reset", () => {
+
+		select.removeAttribute( "disabled" )
 
 		buttons.forEach( button => {
 
