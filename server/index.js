@@ -1,6 +1,8 @@
 import { Server } from "socket.io"
 import { createServer } from "http"
 
+const clients = []
+
 const httpServer = createServer()
 const io = new Server( httpServer, {
 	cors: {
@@ -13,9 +15,15 @@ httpServer.listen( 3_000, () => {
 	console.log( "Server listening on port 3000" )
 } )
 
-io.on( "connection", socket => {
+io.on( "connection", client => {
 
-	console.log( "New connection" )
+	clients.push( client )
 
-	socket.on( "event_a", () => socket.emit( "event_b" ) )
+	client.on( "send_message", message => {
+
+		for ( const client of clients ) {
+
+			client.emit( "receive_message", message )
+		}
+	} )
 } )
