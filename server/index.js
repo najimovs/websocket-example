@@ -22,6 +22,17 @@ io.on( "connection", client => {
 
 	clients.push( client )
 
+	client.on( "reset", () => {
+
+		lastSymbol = null
+		state.clear()
+
+		for ( const client of clients ) {
+
+			client.emit( "reset" )
+		}
+	} )
+
 	client.on( "action", ( { index, symbol } ) => {
 
 		if ( state.has( index ) ) {

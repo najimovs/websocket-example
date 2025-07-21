@@ -10,6 +10,12 @@ function run() {
 
 	const buttons = document.querySelectorAll( "#game-matrix button" )
 	const select = document.querySelector( "select" )
+	const resetButton = document.querySelector( "#app > button" )
+
+	resetButton.onclick = () => {
+
+		socket.emit( "reset" )
+	}
 
 	select.onchange = () => {
 
@@ -22,6 +28,15 @@ function run() {
 
 		buttons[ index ].textContent = symbol
 		buttons[ index ].setAttribute( "disabled", "true" )
+	} )
+
+	socket.on( "reset", () => {
+
+		buttons.forEach( button => {
+
+			button.textContent = ""
+			button.removeAttribute( "disabled" )
+		} )
 	} )
 
 	buttons.forEach( ( button, index ) => {

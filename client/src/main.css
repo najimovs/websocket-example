@@ -30,3 +30,8 @@
 	background-color: #e0e0e0;
 	cursor: pointer;
 }
+
+#app > button {
+	padding: 0.25rem 0.5rem;
+	cursor: pointer;
+}
